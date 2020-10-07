@@ -1,0 +1,21 @@
+{
+  "name": "musictheory",
+  "version": "0.0.1",
+  "homepage": "https://musictheory.github.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dantaki/musictheory.github.io"
+  },
+  "authors": [
+    "Danny Antaki <dantaki@ucsd.edu> (https://dantaki.github.io)"
+  ],
+  "description": "Personal notes on music theory.",
+  "main": "css/skeleton.css",
+  "keywords": [
+    "music",
+    "musictheory",
+    "music theory",
+    "guitar"
+  ],
+  "license": "MIT"
+}
