@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Songs</title>
-  <meta name="description" content="Songs to play on guitar">
+  <title>Albums</title>
+  <meta name="description" content="Albums">
   <meta name="author" content="Danny Antaki">
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -16,6 +16,8 @@
 <link href='https://fonts.googleapis.com/css?family=IBM Plex Serif' rel='stylesheet'>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <div class="navbar" style="background-color:#000000;">
@@ -30,28 +32,64 @@
 
 <body>
 
+<hr>
 <!-- Primary Page Layout
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
 <div class="container">
-  <div class="row">
-   <div class="two column" style="margin-top: 10%">
-  
-      <h4>Songs</h4>
-      <hr>
-    </div>
+  <div class="row" style="margin-left: 5%" style="margin-top: 10%">
+  <!-- –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <input type="text" id="myInput" onkeyup="filter_table()" placeholder="Search for names..">
+
+  <table id="myTable">
+    <tr class="header">
+      <th style="width:60%;">Name</th>
+      <th style="width:40%;">Country</th>
+    </tr>
+    <tr>
+      <td>Alfreds Futterkiste</td>
+      <td>Germany</td>
+    </tr>
+    <tr>
+      <td>Berglunds snabbkop</td>
+      <td>Sweden</td>
+    </tr>
+    <tr>
+      <td>Island Trading</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <td>Koniglich Essen</td>
+      <td>Germany</td>
+    </tr>
+  </table> 
+  <!-- –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   </div>
 </div>
-<!-- –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-<div class="container">
-  <div class="row">
-   <div class="two column" style="margin-top: 10%">
-    <ul>
-      <li><a style="text-decoration:none;" href="songs/beatles.html">Beatles</a></li>
-      <li><a style="text-decoration:none;" href="songs/nirvana.html">Nirvana</a></li>
-    </ul>
-  </div>
-  </div>
-</div>
-<!-- –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
 </body>
 </html>
+
+ <script>
+function filter_table() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
