@@ -27,6 +27,7 @@
   <a href="chord/chords.html" style="text-decoration: none;color: #ffffff;padding-left:20px;">Chords</a>
   <a href="chord/arpeggio.html" style="text-decoration: none;color: #ffffff;padding-left:20px;">Arpeggio</a>
   <a href="albums.html" style="text-decoration: none;color: #ffffff;padding-left:20px;">Albums</a>
+  <a href="lessons.html" style="text-decoration: none;color: #ffffff;padding-left:20px;">Lessons</a>
 </div> 
 
 
@@ -39,7 +40,9 @@
 <div class="container">
   <div class="row" style="margin-left: 5%" style="margin-top: 10%">
   <!-- –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <input type="text" id="myInput" onkeyup="filter_table()" placeholder="Search for names..">
+  <input type="text" class="myInput" onkeyup="set_filter(this, 0)"  placeholder="Artist..." >
+  <input type="text" class="myInput" onkeyup="set_filter(this, 1)"  placeholder="Album..." >
+  <input type="text" class="myInput" onkeyup="set_filter(this, 2)"  placeholder="Date..." >
 
   <table id="myTable">
     <tr class="header">
@@ -334,25 +337,31 @@
 </html>
 
  <script>
-function filter_table() {
-  // Declare variables
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
+let filters = ["",""];
 
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
+function set_filter(thisInput, thisIndex) {
+  filters[thisIndex] = thisInput.value.toUpperCase();
+  
+  filter_table();
+}
+
+function filter_table() {
+  var table = document.getElementById("myTable");
+  var rows = Object.values(table.getElementsByTagName("tr"));
+  
+  for(var rowItr=1; rowItr < rows.length; rowItr++) {
+    var row = rows[rowItr];
+    var cells = Object.values(row.getElementsByTagName("td"));
+    
+    
+    var isRowVisible = filters.every((filter, filterIndex) => {
+        var cell = cells[filterIndex];
+        var txtValue = cell.textContent || cell.innerText;
+
+        return filter === "" || txtValue.toUpperCase().indexOf(filter) > -1;
+    });
+    
+    row.style.display = isRowVisible ? "" : "none";
+  };
 }
 </script>
